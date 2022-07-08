@@ -5,6 +5,6 @@ set(CMAKE_CXX_STANDARD 14)
 
 find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 
-add_executable(43_OldSchoolDemoEffects main.cpp)
+add_executable(43_OldSchoolDemoEffects main.cpp Video.cpp PlasmaEffect.cpp)
 
 target_link_libraries(43_OldSchoolDemoEffects sfml-graphics)
