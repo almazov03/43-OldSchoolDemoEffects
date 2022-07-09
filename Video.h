@@ -9,6 +9,7 @@
 #include <random>
 
 #include "PlasmaEffect.h"
+#include "TunnelEffect.h"
 
 struct Video {
     Video(int height, int width);
@@ -25,6 +26,7 @@ struct Video {
 
 private:
     PlasmaEffect plasma;
+    TunnelEffect tunnel;
 
     sf::Clock dtClock;
     float dt{};
