@@ -12,7 +12,7 @@ Video::Video(int height, int width) {
     auto r = [](int i) { return int(128.0 + 128 * sin(3.1415 * i / 32.0)); };
     auto g = [](int i) { return int(128.0 + 128 * sin(3.1415 * i / 64.0)); };
     auto b = [](int i) { return int(128.0 + 128 * sin(3.1415 * i / 128.0)); };
-    auto f = [&height, &width](float x, float y) {
+    auto plasmaFunction = [&height, &width](float x, float y) {
         float h = height / 2.0;
         float w = width / 2.0;
         x /= 2.0, y /= 2.0;
@@ -23,7 +23,8 @@ Video::Video(int height, int width) {
                128.0 + (128.0 * cos(sqrt(double(x * x + y * y)) / 8.0));
     };
 
-    plasma = PlasmaEffect(window, f, r, g, b);
+    plasma = PlasmaEffect(window, plasmaFunction,
+                          Palette(r, g, b));
 ///---------------------PLASMA---------------------------------------
 
 ///---------------------TUNNEL---------------------------------------
@@ -31,6 +32,13 @@ Video::Video(int height, int width) {
     image.loadFromFile("../lol2.png");
     tunnel = TunnelEffect(window, image);
 ///---------------------TUNNEL---------------------------------------
+
+///---------------------FIRE---------------------------------------
+    auto hsvFunction = [](int x){
+        return HsvColor{x / 4, 255, std::min(255, x * 3)};
+    };
+    fire = FireEffect(window, Palette(hsvFunction));
+///---------------------FIRE---------------------------------------
 }
 
 void Video::updateDt() {
@@ -51,13 +59,15 @@ void Video::update() {
     updateDt();
     handleInput();
 //    plasma.update(dt);
-    tunnel.update(dt);
+//    tunnel.update(dt);
+    fire.update(dt);
 }
 
 void Video::render() {
     window->clear();
 //    plasma.render();
-    tunnel.render();
+//    tunnel.render();
+    fire.render();
     window->display();
 }
 

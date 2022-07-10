@@ -1,11 +1,7 @@
 #include "TunnelEffect.h"
-#include <iostream>
 
-TunnelEffect::TunnelEffect(const std::shared_ptr<sf::RenderWindow> &window, const sf::Image &image) {
-    this->window = window;
-    height = window->getSize().y;
-    width = window->getSize().x;
-
+TunnelEffect::TunnelEffect(const std::shared_ptr<sf::RenderWindow> &window,
+                           const sf::Image &image) : Effect(window) {
     imageHeight = image.getSize().y;
     imageWidth = image.getSize().x;
     pixelColor.resize(imageHeight);
@@ -17,15 +13,6 @@ TunnelEffect::TunnelEffect(const std::shared_ptr<sf::RenderWindow> &window, cons
 
     ratio = 32.0;
     shiftX = shiftY = centerShiftX_ = centerShiftY_ = 0;
-
-    screen.resize(height);
-    for (int y = 0; y < height; ++y){
-        for (int x = 0; x < width; ++x){
-            screen[y].push_back(sf::RectangleShape());
-            screen[y][x].setSize({1, 1});
-            screen[y][x].setPosition(sf::Vector2f(x, y));
-        }
-    }
 
     distanceTable.resize(2 * height);
     angleTable.resize(2 * height);
@@ -74,14 +61,6 @@ void TunnelEffect::update(float dt) {
     centerShiftY_ += 0.25 * dt;
     if (centerShiftY_ >= 2 * 3.1415){
         centerShiftY_ -= 2 * 3.1415;
-    }
-}
-
-void TunnelEffect::render() {
-    for (int y = 0; y < height; ++y) {
-        for (int x = 0; x < width; ++x) {
-            window->draw(screen[y][x]);
-        }
     }
 }
 

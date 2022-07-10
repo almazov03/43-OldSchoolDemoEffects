@@ -6,10 +6,10 @@
 #include <cmath>
 #include <functional>
 #include <memory>
-#include <random>
 
 #include "PlasmaEffect.h"
 #include "TunnelEffect.h"
+#include "FireEffect.h"
 
 struct Video {
     Video(int height, int width);
@@ -27,6 +27,7 @@ struct Video {
 private:
     PlasmaEffect plasma;
     TunnelEffect tunnel;
+    FireEffect fire;
 
     sf::Clock dtClock;
     float dt{};
