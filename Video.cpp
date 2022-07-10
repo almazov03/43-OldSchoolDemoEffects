@@ -29,7 +29,7 @@ Video::Video(int height, int width) {
 
 ///---------------------TUNNEL---------------------------------------
     sf::Image image;
-    image.loadFromFile("../lol2.png");
+    image.loadFromFile("../Assets/lol2.png");
     tunnel = TunnelEffect(window, image);
 ///---------------------TUNNEL---------------------------------------
 
